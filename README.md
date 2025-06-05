@@ -135,15 +135,86 @@ Conecta tu iPhone por USB y autoriza el dispositivo desde Xcode.
 
 ## Capturas de Pantalla
 
-### Lista de tareas
+### Lista de tareas (Home)
 
-![Lista de tareas](screenshots/tareas.png)
+![image1](screenshots/image1.png)
 
-### Crear categoría
+---
 
-![Crear categoría](screenshots/categorias.png)
+### Lista de categorias
 
-> Coloca tus capturas de pantalla en `src/assets/screenshots/` y actualiza las rutas si es necesario.
+![image2](screenshots/image2.png)
+
+---
+
+### Se crean dos categorias y tres tareas
+
+![image3](screenshots/image3.png)
+![image4](screenshots/image4.png)
+![image5](screenshots/image5.png)
+
+---
+
+### Se modifica el nombre de la categoria A a C
+se puede ver el cambio de los iconos cuando se selecciona editar.
+
+![image6](screenshots/image6.png)
+![image7](screenshots/image7.png)
+
+---
+
+### Se completan dos tareas
+se puede ver el cambio de los iconos cuando se selecciona editar.
+
+![image6](screenshots/image8.png)
+
+---
+
+### Se regresa una tarea a pendiente
+
+![image9](screenshots/image9.png)
+
+---
+
+### Se crean dos tareas mas para probar los filtro
+
+![image10](screenshots/image10.png)
+
+Filtro: Sin Categoria
+![image11](screenshots/image11.png)
+
+Filtro: Categoria C
+![image12](screenshots/image12.png)
+
+Filtro: Categoria B
+![image13](screenshots/image13.png)
+
+Filtro: Todas
+![image14](screenshots/image14.png)
+
+---
+
+### Se eliminan las categorias
+
+![image15](screenshots/image15.png)
+![image16](screenshots/image16.png)
+
+---
+
+### Prueba remote config
+
+La app esta leyendo el valor que se creo en este remote config:
+![remote-config-dashboard](screenshots/remote-config-dashboard.png)
+![remote-config-true](screenshots/remote-config-true.png)
+
+Como vemos en la parte superior se esta mostrando el valor del config
+![image15](screenshots/image17.png)
+
+Cambiamos el valor del config
+![remote-config-false](screenshots/remote-config-false.png)
+
+despues de actualizar la vista se ve el nuevo valor del config
+![image16](screenshots/image18.png)
 
 ---
 
