@@ -91,13 +91,21 @@ ionic cordova run android
 ionic cordova build android
 ```
 
-Ubicación del APK:
-`platforms/android/app/build/outputs/apk/debug/app-debug.apk`
-
 ### Release APK
 
 ```bash
 ionic cordova build android --release
+```
+
+---
+
+### Ubicación del APK:
+
+
+```bash
+build: platforms/android/app/build/outputs/apk/debug/app-debug.apk
+
+demo: runnables/
 ```
 
 ---
