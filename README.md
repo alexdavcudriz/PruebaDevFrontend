@@ -153,6 +153,34 @@ src/
 
 ---
 
-## Licencia
+## Respuestas
 
-MIT © Tu Nombre
+#### 1. ¿Cuáles fueron los principales desafíos que enfrentaste al implementar las nuevas funcionalidades?
+
+Uno de los desafíos más grandes fue integrar Firebase con Cordova, especialmente usando el plugin `cordova-plugin-firebasex`. Me encontré con varios errores durante la construcción del APK, como incompatibilidades de versión, errores como `cordova_not_available` al ejecutar en navegador, y métodos no soportados por el plugin como `getRemoteConfigValue` o `getBoolean`.
+
+Otro reto importante fue configurar correctamente `google-services.json`, ya que en un punto el nombre del paquete en el archivo no coincidía con el de mi proyecto, lo cual causaba el error: *"No matching client found for package name"*.
+
+También fue complicado trabajar con Remote Config en el navegador, ya que Cordova no está diseñado para ejecutarse en ese entorno. Eso me llevó a explorar alternativas con el SDK Web de Firebase para simular correctamente el comportamiento.
+
+#### 2. ¿Qué técnicas de optimización de rendimiento aplicaste y por qué?
+
+Una de las primeras optimizaciones que implementé fue configurar parámetros como `minimumFetchIntervalMillis` y `fetchTimeoutMillis` en Remote Config. Esto me permitió reducir la cantidad de llamadas a la red y acelerar el tiempo de respuesta de la aplicación.
+
+En cuanto a la lógica de la app, optimicé el filtrado de tareas por categoría en memoria usando Angular con `*ngFor` y filtros reactivos basados en `ngModel`, lo que evitó cálculos innecesarios.
+
+También limpié las dependencias no utilizadas del proyecto. Por ejemplo, eliminé plugins de Firebase que no estaban aportando valor o que causaban conflictos. Esto mejoró el tiempo de build y redujo el tamaño del proyecto.
+
+Finalmente, implementé carga diferida de datos con `async/await` para asegurar que la UI no intentara mostrar datos que aún no estaban disponibles, lo cual ayudó a evitar errores y mejorar la experiencia de usuario.
+
+#### 3. ¿Cómo aseguraste la calidad y mantenibilidad del código?
+
+Para asegurar la calidad del código, organicé la lógica de Remote Config dentro de un servicio (`FirebaseRemoteConfigService`). Esto me permitió tener una única fuente de verdad para las configuraciones remotas y facilitó mucho su mantenimiento.
+
+También utilicé un archivo separado llamado `firebase.config.ts` para manejar las propiedades y configuraciones de Firebase, lo cual hace más limpio el archivo principal del componente y evita la repetición de código.
+
+Seguí buenas prácticas de Angular e Ionic, como el uso de `*ngIf`, `*ngFor`, y bindings limpios. Además, documenté todo en un README y utilicé `console.log` de manera controlada para pruebas locales y debugging.
+
+Otra buena práctica fue probar la app en múltiples entornos: primero en navegador, luego en emulador Android, y finalmente generando el APK. Esto me ayudó a asegurarme de que el comportamiento fuera consistente.
+
+Por último, eliminé por completo dependencias conflictivas como `cordova-plugin-firebasex` y migré a soluciones más mantenibles, lo cual simplificó mucho el entorno del proyecto.

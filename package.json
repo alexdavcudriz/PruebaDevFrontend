@@ -23,6 +23,7 @@
     "@angular/router": "^19.0.0",
     "@ionic/angular": "^8.0.0",
     "@ionic/cordova-builders": "^12.2.0",
+    "firebase": "^11.9.0",
     "ionicons": "^7.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -72,8 +73,8 @@
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

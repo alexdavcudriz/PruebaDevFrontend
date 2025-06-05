@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../models/task.model';
 import { Category } from '../models/category.model';
+import { FirebaseRemoteConfigService } from '../services/firebase-remote-config.service';
 
 @Component({
   selector: 'app-home',
@@ -9,19 +10,29 @@ import { Category } from '../models/category.model';
   standalone: false
 })
 export class HomePage implements OnInit {
+  isFeatureEnabled = false;
   tasks: Task[] = [];
   newTask: string = '';
   categories: Category[] = [];
   selectedCategoryId: number | null = null;
   filterCategoryId: number | null = null;
 
-  ngOnInit() {
+  constructor(private remoteConfigService: FirebaseRemoteConfigService) { }
+
+  async ngOnInit() {
+    this.checkIsFeatureEnabled();
     this.loadTasks();
     this.loadCategories();
   }
 
   ionViewWillEnter() {
+    this.checkIsFeatureEnabled();
     this.loadCategories();
+  }
+
+  async checkIsFeatureEnabled() {
+    this.isFeatureEnabled = await this.remoteConfigService.getFeatureFlag('showExtraInfo');
+    console.log("isFeatureEnabled", this.isFeatureEnabled)
   }
 
   loadCategories() {
@@ -32,7 +43,6 @@ export class HomePage implements OnInit {
   }
 
   getCategoryName(categoryId: number | undefined | null): string {
-    console.log("categoryId", categoryId, this.categories)
     return this.categories.find(c => c.id === categoryId)?.name || 'Sin categoría';
   }
 
@@ -53,20 +63,20 @@ export class HomePage implements OnInit {
   addTask() {
     const title = this.newTask.trim();
     if (!title) return;
-  
+
     const newTask: Task = {
       id: Date.now(),
       title,
       completed: false,
       categoryId: this.selectedCategoryId ?? 0,
     };
-  
+
     this.tasks.push(newTask);
     this.newTask = '';
     this.selectedCategoryId = null;
     this.saveTasks();
   }
-  
+
 
   toggleTaskCompletion(task: Task) {
     task.completed = !task.completed;
