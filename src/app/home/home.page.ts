@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../models/task.model';
+import { Category } from '../models/category.model';
 
 @Component({
   selector: 'app-home',
@@ -10,32 +11,62 @@ import { Task } from '../models/task.model';
 export class HomePage implements OnInit {
   tasks: Task[] = [];
   newTask: string = '';
+  categories: Category[] = [];
+  selectedCategoryId: number | null = null;
+  filterCategoryId: number | null = null;
 
   ngOnInit() {
     this.loadTasks();
+    this.loadCategories();
+  }
+
+  ionViewWillEnter() {
+    this.loadCategories();
+  }
+
+  loadCategories() {
+    const stored = localStorage.getItem('categories');
+    if (stored) {
+      this.categories = JSON.parse(stored);
+    }
+  }
+
+  getCategoryName(categoryId: number | undefined | null): string {
+    console.log("categoryId", categoryId, this.categories)
+    return this.categories.find(c => c.id === categoryId)?.name || 'Sin categoría';
   }
 
   get pendingTasks(): Task[] {
-    return this.tasks.filter(t => !t.completed);
+    return this.tasks.filter(task =>
+      !task.completed &&
+      (this.filterCategoryId == null || task.categoryId === this.filterCategoryId)
+    );
   }
 
   get completedTasks(): Task[] {
-    return this.tasks.filter(t => t.completed);
+    return this.tasks.filter(task =>
+      task.completed &&
+      (this.filterCategoryId == null || task.categoryId === this.filterCategoryId)
+    );
   }
 
   addTask() {
-    if (!this.newTask.trim()) return;
-
-    const task: Task = {
+    const title = this.newTask.trim();
+    if (!title) return;
+  
+    const newTask: Task = {
       id: Date.now(),
-      title: this.newTask.trim(),
+      title,
       completed: false,
+      categoryId: this.selectedCategoryId ?? 0,
     };
-
-    this.tasks.push(task);
+  
+    this.tasks.push(newTask);
     this.newTask = '';
+    this.selectedCategoryId = null;
     this.saveTasks();
   }
+  
 
   toggleTaskCompletion(task: Task) {
     task.completed = !task.completed;

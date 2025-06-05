@@ -12,15 +12,36 @@
     Gestionar Categorías
   </ion-button>
 
+  <!-- Seleccionar categoría -->
+  <ion-item>
+    <ion-label>Categoría</ion-label>
+    <ion-select [(ngModel)]="selectedCategoryId" interface="popover" placeholder="Seleccionar categoría">
+      <ion-select-option [value]="0">Sin categoría</ion-select-option>
+      <ion-select-option *ngFor="let cat of categories" [value]="cat.id">
+        {{ cat.name }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
   <!-- Formulario para agregar nueva tarea -->
   <ion-item>
-    <ion-input
-      placeholder="Nueva tarea"
-      [(ngModel)]="newTask"
-      (keyup.enter)="addTask()"
-    ></ion-input>
+    <ion-input placeholder="Nueva tarea" [(ngModel)]="newTask" (keyup.enter)="addTask()"></ion-input>
     <ion-button slot="end" (click)="addTask()">Agregar</ion-button>
   </ion-item>
+
+  <!-- Filtro por categoría -->
+  <ion-item>
+    <ion-label>Filtrar por categoría</ion-label>
+    <ion-select [(ngModel)]="filterCategoryId" interface="popover" placeholder="Todas">
+      <ion-select-option [value]="null">Todas</ion-select-option>
+      <ion-select-option [value]="0">Sin categoría</ion-select-option>
+      <ion-select-option *ngFor="let cat of categories" [value]="cat.id">
+        {{ cat.name }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
 
   <!-- Lista de tareas activas -->
   <ion-list *ngIf="pendingTasks.length > 0">
@@ -31,6 +52,9 @@
     <ion-item *ngFor="let task of pendingTasks">
       <ion-label [class.completed]="task.completed">
         {{ task.title }}
+        <p>
+          Categoría: {{ getCategoryName(task.categoryId) }}
+        </p>
       </ion-label>
 
       <ion-buttons slot="end">
