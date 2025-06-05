@@ -26,6 +26,14 @@ GitHub: [https://github.com/alexdavcudriz](https://github.com/alexdavcudriz)
 
 ---
 
+### Ubicación del APK DEMO:
+
+```bash
+runnables/
+```
+
+---
+
 ## Instalación
 
 ```bash
@@ -101,11 +109,8 @@ ionic cordova build android --release
 
 ### Ubicación del APK:
 
-
 ```bash
-build: platforms/android/app/build/outputs/apk/debug/app-debug.apk
-
-demo: runnables/
+platforms/android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
 ---
@@ -156,15 +161,13 @@ Conecta tu iPhone por USB y autoriza el dispositivo desde Xcode.
 ---
 
 ### Se modifica el nombre de la categoria A a C
-se puede ver el cambio de los iconos cuando se selecciona editar.
-
+#### se puede ver el cambio de los iconos cuando se selecciona editar.  
 ![image6](screenshots/image6.png)
 ![image7](screenshots/image7.png)
 
 ---
 
 ### Se completan dos tareas
-se puede ver el cambio de los iconos cuando se selecciona editar.
 
 ![image6](screenshots/image8.png)
 
@@ -180,16 +183,16 @@ se puede ver el cambio de los iconos cuando se selecciona editar.
 
 ![image10](screenshots/image10.png)
 
-Filtro: Sin Categoria
+#### Filtro: Sin Categoria  
 ![image11](screenshots/image11.png)
 
-Filtro: Categoria C
+#### Filtro: Categoria C  
 ![image12](screenshots/image12.png)
 
-Filtro: Categoria B
+#### Filtro: Categoria B  
 ![image13](screenshots/image13.png)
 
-Filtro: Todas
+#### Filtro: Todas  
 ![image14](screenshots/image14.png)
 
 ---
@@ -203,17 +206,17 @@ Filtro: Todas
 
 ### Prueba remote config
 
-La app esta leyendo el valor que se creo en este remote config:
+#### La app esta leyendo el valor que se creo en este remote config:  
 ![remote-config-dashboard](screenshots/remote-config-dashboard.png)
 ![remote-config-true](screenshots/remote-config-true.png)
 
-Como vemos en la parte superior se esta mostrando el valor del config
+#### Como vemos en la parte superior se esta mostrando el valor del config  
 ![image15](screenshots/image17.png)
 
-Cambiamos el valor del config
+#### Cambiamos el valor del config  
 ![remote-config-false](screenshots/remote-config-false.png)
 
-despues de actualizar la vista se ve el nuevo valor del config
+#### Despues de actualizar la vista se ve el nuevo valor del config  
 ![image16](screenshots/image18.png)
 
 ---
