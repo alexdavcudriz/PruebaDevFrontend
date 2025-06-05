@@ -6,6 +6,12 @@
 
 <ion-content class="ion-padding">
 
+  <!-- Botón para gestionar categorías -->
+  <ion-button routerLink="/categories" expand="block" color="primary">
+    <ion-icon name="folder-open-outline" slot="start"></ion-icon>
+    Gestionar Categorías
+  </ion-button>
+
   <!-- Formulario para agregar nueva tarea -->
   <ion-item>
     <ion-input
@@ -13,46 +19,50 @@
       [(ngModel)]="newTask"
       (keyup.enter)="addTask()"
     ></ion-input>
-    <ion-button (click)="addTask()">Agregar</ion-button>
+    <ion-button slot="end" (click)="addTask()">Agregar</ion-button>
   </ion-item>
 
   <!-- Lista de tareas activas -->
-  <ion-list>
+  <ion-list *ngIf="pendingTasks.length > 0">
     <ion-list-header>
       <ion-label>Tareas</ion-label>
     </ion-list-header>
+
     <ion-item *ngFor="let task of pendingTasks">
-      <ion-label [class.completed]="task.completed">{{ task.title }}</ion-label>
+      <ion-label [class.completed]="task.completed">
+        {{ task.title }}
+      </ion-label>
 
-      <!-- Botón para marcar como completada -->
-      <ion-button fill="clear" (click)="toggleTaskCompletion(task)">
-        <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
-      </ion-button>
-
-      <!-- Botón para eliminar tarea -->
-      <ion-button fill="clear" color="danger" (click)="deleteTask(task)">
-        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-      </ion-button>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="toggleTaskCompletion(task)">
+          <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="danger" (click)="deleteTask(task)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
   </ion-list>
 
   <!-- Lista de tareas completadas -->
-  <ion-list>
+  <ion-list *ngIf="completedTasks.length > 0">
     <ion-list-header>
-      <ion-label>Tareas completadas</ion-label>
+      <ion-label>Tareas Completadas</ion-label>
     </ion-list-header>
+
     <ion-item *ngFor="let task of completedTasks">
-      <ion-label>{{ task.title }}</ion-label>
+      <ion-label class="completed">
+        {{ task.title }}
+      </ion-label>
 
-      <!-- Botón para marcar como no completada -->
-      <ion-button fill="clear" (click)="toggleTaskCompletion(task)">
-        <ion-icon slot="icon-only" name="arrow-undo-outline"></ion-icon>
-      </ion-button>
-
-      <!-- Botón para eliminar tarea -->
-      <ion-button fill="clear" color="danger" (click)="deleteTask(task)">
-        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-      </ion-button>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="toggleTaskCompletion(task)">
+          <ion-icon slot="icon-only" name="arrow-undo-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="danger" (click)="deleteTask(task)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
   </ion-list>
 

@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Categorías</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Botón para volver -->
+  <ion-button routerLink="/" expand="block" color="medium">
+    <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+    Volver
+  </ion-button>
+
+  <!-- Agregar nueva categoría -->
+  <ion-item>
+    <ion-input
+      placeholder="Nueva categoría"
+      [(ngModel)]="newCategoryName"
+      (keyup.enter)="addCategory()"
+    ></ion-input>
+    <ion-button slot="end" (click)="addCategory()">Agregar</ion-button>
+  </ion-item>
+
+  <!-- Lista de categorías -->
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Categorías existentes</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let category of categories">
+      <ion-label *ngIf="editingCategory?.id !== category.id">
+        {{ category.name }}
+      </ion-label>
+
+      <ion-input *ngIf="editingCategory?.id === category.id" [(ngModel)]="editingName"></ion-input>
+
+      <ion-buttons slot="end">
+        <!-- Botones de edición o confirmación -->
+        <ng-container *ngIf="editingCategory?.id !== category.id; else editingButtons">
+          <ion-button fill="clear" (click)="editCategory(category)">
+            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" color="danger" (click)="deleteCategory(category)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-button>
+        </ng-container>
+
+        <ng-template #editingButtons>
+          <ion-button fill="clear" (click)="saveEdit()">
+            <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" color="medium" (click)="cancelEdit()">
+            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+          </ion-button>
+        </ng-template>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
