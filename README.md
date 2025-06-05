@@ -29,7 +29,7 @@ GitHub: [https://github.com/alexdavcudriz](https://github.com/alexdavcudriz)
 ### Ubicación del APK DEMO:
 
 ```bash
-runnables/
+runnables/prueba-dev-frontend.0.0.1.apk
 ```
 
 ---
@@ -43,6 +43,8 @@ npm install
 ```
 
 ## Requisitos
+
+> ⚠️ Se utilizaron las versiones de `node 18` y `java 11`
 
 - Node.js y npm
 - Ionic CLI (`npm install -g @ionic/cli`)
